@@ -1,43 +1,22 @@
 let express = require("express")
 let app = express()
+let i=0;
+   function login(){
+      return new Promise((resolve,reject)=>{
+           setTimeout(()=>{
+               try{
+                     resolve(`Finish Timeout .....${i++}`)
+               }
+               catch(err){
+                     reject(`Exeption ............ ${err} `)
+               }              
+           })
+       })
+   }
 
-
-
-
-
-var p1 = new Promise((resolve, reject) => { 
-    setTimeout(() => resolve('one'), 1000); 
-  }); 
-  var p2 = new Promise((resolve, reject) => { 
-    setTimeout(() => resolve('two'), 2000); 
-  });
-  var p3 = new Promise((resolve, reject) => {
-    setTimeout(() => resolve('three'), 3000);
-  });
-  var p4 = new Promise((resolve, reject) => {
-    setTimeout(() => resolve('four'), 4000);
-  });
-  var p5 = new Promise((resolve, reject) => {
-    reject(new Error('reject'));
-  });
-  
-  
-  // Using .catch:
-  Promise.all([p1, p2, p3, p4, p5])
-  .then(values => { 
-    console.log(values);
-  })
-  .catch(error => { 
-    console.error(error.message)
-  });
-  
-  //From console: 
-  //"reject"
-  
-
-
-
-
+   app.get("/",async (req,res)=>{
+       res.send(await login())
+   })
 app.listen(3800, () => {
     console.log("Connect To Server........")
 })
