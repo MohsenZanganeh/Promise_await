@@ -1,27 +1,42 @@
 let express = require("express")
 let app = express()
 
-let promisA = Promise.resolve(50)
-let promisB = 45;
-let PromisC = new Promise((resolve, reject) => {
-    setTimeout(() => {
-        resolve("finish Timeout........")
-    }, 1000)
-})
 
-Promise.all([promisA,promisB,PromisC]).then(velue=>{
-    console.log(velue)
-})
 
-let p1=Promise.all(["Hello","Mohsen 1111"])
-let p2=Promise.all(["Hello","Mohsen 2222"])
-let p3=Promise.all(["Hello","Mohsen 3333"])
 
-setTimeout(()=>{
-   console.log(p1)
-   console.log(p2)
-   console.log(p3)
-})
+
+var p1 = new Promise((resolve, reject) => { 
+    setTimeout(() => resolve('one'), 1000); 
+  }); 
+  var p2 = new Promise((resolve, reject) => { 
+    setTimeout(() => resolve('two'), 2000); 
+  });
+  var p3 = new Promise((resolve, reject) => {
+    setTimeout(() => resolve('three'), 3000);
+  });
+  var p4 = new Promise((resolve, reject) => {
+    setTimeout(() => resolve('four'), 4000);
+  });
+  var p5 = new Promise((resolve, reject) => {
+    reject(new Error('reject'));
+  });
+  
+  
+  // Using .catch:
+  Promise.all([p1, p2, p3, p4, p5])
+  .then(values => { 
+    console.log(values);
+  })
+  .catch(error => { 
+    console.error(error.message)
+  });
+  
+  //From console: 
+  //"reject"
+  
+
+
+
 
 app.listen(3800, () => {
     console.log("Connect To Server........")
