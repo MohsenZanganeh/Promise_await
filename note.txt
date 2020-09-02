@@ -1,0 +1,4 @@
+fulfilled(resolved) : It Worked
+Rejacted : it didn't Worked
+pending :  still waiting-> is not yet fulfilled or refected
+settled :  somthing happened ->either fulfilled or Rejacted
