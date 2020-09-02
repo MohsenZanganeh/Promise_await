@@ -6,26 +6,22 @@ async function login(res) {
     let a = new Promise((resolve, reject) => {
         resolve("5")
     })
-    return await a.then(result => {
-            return result + "10"
-        }).then(result => {
-            return result + "10"
-        }).then(result => {
-            return d + "--55"
-        }).catch(err => {
-            if (err) {
-                console.log("err:", err)
-                return err
-            }
-        })
+ 
 }
 
-app.get("/", async (req, res) => {
-    const rr = await login(res).then((result) => {
-        res.send(result)
-    })
-
-    return `${rr} mohsen`
+app.get("/",  (req, res) => {
+    Promise.all([Promise.reject(1), Promise.resolve(2)])
+    .catch((err) => {
+      console.log('err', err);
+    });
+    // err 1
+    // Differences between Promise.all() and Promise.allSettled() in JS?
+  Promise.allSettled([Promise.reject(1), Promise.resolve(2)])
+    .then(console.log);
+    // [
+    //     { status: 'rejected', reason: 1 },
+    //     { status: 'fulfilled', value: 2 }
+    // ]
 
 })
 
